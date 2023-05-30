@@ -3,6 +3,7 @@ mutation SignUp($input: SignUpInput!) {
     accessToken
     refreshToken
     user {
+      id
       username
       email
     }

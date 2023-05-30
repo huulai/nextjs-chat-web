@@ -1,12 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserThunk, signUpThunk } from "./userThunk";
+import {
+  getUserInfoThunk,
+  refreshTokenThunk,
+  signInThunk,
+  signUpThunk,
+} from "./userThunk";
+import { router } from "../../../routes";
+import { RootState } from "../..";
 
 export interface userState {
+  userId: string;
   username: string;
   email: string;
 }
 
 const initialState: userState = {
+  userId: "",
   username: "",
   email: "",
 };
@@ -14,23 +23,9 @@ const initialState: userState = {
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-    // addMessage: (state, action: PayloadAction<MessageEventPayload>) => {
-    //   console.log(state);
-    //   console.log(action);
-    //   const { conversation, message } = action.payload;
-    //   const conversationMessage = state.messages.find(
-    //     (cm) => cm.id === conversation.id
-    //   );
-    //   conversationMessage?.messages.unshift(message);
-    // },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchUserThunk.fulfilled, (state, action) => {
-        const data = action.payload;
-        console.log(data);
-      })
       .addCase(signUpThunk.fulfilled, (state, { payload }) => {
         if (payload) {
           localStorage.setItem(
@@ -42,12 +37,52 @@ export const userSlice = createSlice({
             payload.signup.refreshToken as string
           );
           state.email = payload.signup.user.email;
+          state.userId = payload.signup.user.id;
           state.username = payload.signup.user.username;
+        }
+      })
+      .addCase(signInThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          localStorage.setItem(
+            "accessToken",
+            payload.signin.accessToken as string
+          );
+          localStorage.setItem(
+            "refreshToken",
+            payload.signin.refreshToken as string
+          );
+          state.userId = payload.signin.user.id;
+          state.email = payload.signin.user.email;
+          state.username = payload.signin.user.username;
+        }
+      })
+      .addCase(refreshTokenThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          localStorage.setItem(
+            "accessToken",
+            payload.getNewTokens.accessToken as string
+          );
+          localStorage.setItem(
+            "refreshToken",
+            payload.getNewTokens.refreshToken as string
+          );
+          state.email = payload.getNewTokens.user.email;
+          state.userId = payload.getNewTokens.user.id;
+          state.username = payload.getNewTokens.user.username;
+          router.navigate("/home");
+        }
+      })
+      .addCase(getUserInfoThunk.fulfilled, (state, { payload }) => {
+        if (payload) {
+          state.userId = payload.user.id;
+          state.email = payload.user.email;
+          state.username = payload.user.username;
         }
       });
   },
 });
 
-// export const { addMessage, deleteMessage, editMessage } = userSlice.actions;
+export const selectPendingFriends = (state: RootState) =>
+  state.friend.friends.filter((friend) => friend.status === "PENDING");
 
 export default userSlice.reducer;

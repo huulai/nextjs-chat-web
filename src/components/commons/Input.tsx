@@ -14,8 +14,7 @@ const Input = ({
   name: string;
 }) => {
   return (
-    <label className="relative block border border-primary rounded-3xl p-1 pl-5 w-full mt-5">
-      <span className="sr-only">Search</span>
+    <label className="relative block border border-primary rounded-3xl p-1 pl-5 w-full mt-5 bg-white">
       <span className="absolute inset-y-0 left-0 flex items-center pl-2">
         {children}
       </span>

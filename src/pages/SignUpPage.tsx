@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from "react";
-import Input from "../components/input";
+import { useState } from "react";
+import Input from "../components/commons/Input";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchUserThunk, signUpThunk } from "../store/slices/user/userThunk";
+import { signUpThunk } from "../store/slices/user/userThunk";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 
@@ -10,17 +10,9 @@ const SignUpPage = () => {
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
 
-  const dataFetchedRef = useRef(false);
   const navigate = useNavigate();
 
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    if (dataFetchedRef.current) return;
-    dataFetchedRef.current = true;
-
-    dispatch(fetchUserThunk());
-  }, []);
 
   const handleSignUp = async () => {
     const result = await dispatch(

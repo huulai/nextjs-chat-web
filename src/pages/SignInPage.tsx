@@ -1,9 +1,10 @@
 import { useState } from "react";
-import Input from "../components/input";
+import Input from "../components/commons/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { signInThunk } from "../store/slices/user/userThunk";
+import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -16,7 +17,6 @@ const SignInPage = () => {
   const handleSignIn = async () => {
     const result = await dispatch(signInThunk({ input: { password, email } }));
 
-    console.log({ result });
     if (result.payload) {
       navigate("/home");
     }

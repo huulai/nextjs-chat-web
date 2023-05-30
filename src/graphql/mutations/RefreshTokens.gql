@@ -2,5 +2,10 @@ mutation refreshTokens {
   getNewTokens {
     accessToken
     refreshToken
+    user {
+      id
+      username
+      email
+    }
   }
 }

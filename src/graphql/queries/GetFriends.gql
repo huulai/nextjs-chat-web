@@ -1,0 +1,16 @@
+query Friends {
+  friends {
+    id
+    status
+    sender {
+      id
+      email
+      username
+    }
+    receiver {
+      id
+      email
+      username
+    }
+  }
+}
