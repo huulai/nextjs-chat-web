@@ -1,0 +1,16 @@
+mutation UpdateFriend($id: Int!, $status: String!) {
+  updateFriend(id:$id , status: $status) {
+    id
+    sender {
+      id
+      email
+      username
+    }
+    receiver {
+      id
+      email
+      username
+    }
+    status
+  }
+}

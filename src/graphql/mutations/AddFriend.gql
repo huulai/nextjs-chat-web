@@ -1,0 +1,16 @@
+mutation AddFriend($email: String!) {
+  addFriend(receiverEmail: $email) {
+    id
+    sender {
+      id
+      email
+      username
+    }
+    receiver {
+      id
+      email
+      username
+    }
+    status
+  }
+}

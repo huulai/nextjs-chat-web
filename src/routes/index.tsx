@@ -4,7 +4,10 @@ import SignInPage from "../pages/SignInPage";
 import SignUpPage from "../pages/SignUpPage";
 import HomePage from "../pages/HomePage";
 import EmptyLayout from "../layout/EmptyLayout";
-import AppLayout from "../layout/AppLayout";
+import AppLayout from "../layout/AppLayout/AppLayout";
+import DiscoveryPage from "../pages/DiscoveryPage";
+import FriendsPage from "../pages/FriendsPage";
+import ProfilePage from "../pages/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +31,30 @@ export const router = createBrowserRouter([
     element: (
       <AppLayout>
         <HomePage />
+      </AppLayout>
+    ),
+  },
+  {
+    path: "/profile",
+    element: (
+      <AppLayout>
+        <ProfilePage />
+      </AppLayout>
+    ),
+  },
+  {
+    path: "/discovery",
+    element: (
+      <AppLayout>
+        <DiscoveryPage />
+      </AppLayout>
+    ),
+  },
+  {
+    path: "/friends",
+    element: (
+      <AppLayout>
+        <FriendsPage />
       </AppLayout>
     ),
   },
