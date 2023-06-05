@@ -1,5 +1,0 @@
-mutation RemoveFriend($id: Int!) {
-  removeFriend(id: $id) {
-    id
-  }
-}

@@ -1,9 +1,22 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { logOutThunk } from "../../store/slices/user/userThunk";
 
 const AppDrawer = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const userId = useAppSelector((state) => state.user.userId);
 
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const handleLogOut = async () => {
+    const result = await dispatch(logOutThunk({ input: Number(userId) }));
+
+    if (result.payload) {
+      navigate("/");
+    }
+  };
   return (
     <div>
       <button
@@ -97,6 +110,19 @@ const AppDrawer = () => {
             />
             <span className="ml-2">Discovery</span>
           </Link>
+          <button
+            className="flex flex-row items-center mt-4 cursor-pointer"
+            onClick={() => handleLogOut()}
+          >
+            <img
+              src="/log-out.svg"
+              alt="log out"
+              width={20}
+              height={20}
+              className="inline-block"
+            />
+            <span className="ml-2">Log out</span>
+          </button>
         </div>
       </div>
     </div>

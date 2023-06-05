@@ -1,11 +1,7 @@
+import { DataFriendAction } from "./../../../graphql/subscriptions/FriendAction";
 import { createSlice } from "@reduxjs/toolkit";
 import { Friend } from "../../../graphql/generated/types";
-import {
-  addFriendThunk,
-  getFriendsThunk,
-  removeFriendThunk,
-  updateFriendThunk,
-} from "./friendThunk";
+import { getFriendsThunk } from "./friendThunk";
 
 export interface friendState {
   friends: Friend[];
@@ -27,39 +23,45 @@ export const friendSlice = createSlice({
     closeModalAddFriend: (state) => {
       state.isOpenModalAddFriend = false;
     },
+    receiveFriendRequest: (
+      state,
+      { payload }: { payload: DataFriendAction }
+    ) => {
+      state.friends.push(payload.friendAction.friend);
+    },
+    updateFriend: (state, { payload }: { payload: DataFriendAction }) => {
+      if (payload) {
+        const idx = state.friends.findIndex(
+          (friend) => friend.id === payload.friendAction.friend.id
+        );
+        const updatedFriend = payload.friendAction.friend as Friend;
+        state.friends.splice(idx, 1, updatedFriend);
+      }
+    },
+    deleteFriend: (state, { payload }: { payload: DataFriendAction }) => {
+      if (payload) {
+        const idx = state.friends.findIndex(
+          (friend) => friend.id === payload.friendAction.friend.id
+        );
+        state.friends.splice(idx, 1);
+      }
+    },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(getFriendsThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.friends = payload?.friends as Friend[];
-        }
-      })
-      .addCase(addFriendThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          state.friends.push(payload.addFriend as Friend);
-        }
-      })
-      .addCase(removeFriendThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          const idx = state.friends.findIndex(
-            (friend) => friend.id === payload.removeFriend.id
-          );
-          state.friends.splice(idx, 1);
-        }
-      })
-      .addCase(updateFriendThunk.fulfilled, (state, { payload }) => {
-        if (payload) {
-          const idx = state.friends.findIndex(
-            (friend) => friend.id === payload.updateFriend.id
-          );
-          const updatedFriend = payload.updateFriend as Friend;
-          state.friends.splice(idx, 1, updatedFriend);
-        }
-      });
+    builder.addCase(getFriendsThunk.fulfilled, (state, { payload }) => {
+      if (payload) {
+        state.friends = payload?.friends as Friend[];
+      }
+    });
   },
 });
 
-export const { openModalAddFriend, closeModalAddFriend } = friendSlice.actions;
+export const {
+  openModalAddFriend,
+  closeModalAddFriend,
+  receiveFriendRequest,
+  updateFriend,
+  deleteFriend,
+} = friendSlice.actions;
 
 export default friendSlice.reducer;

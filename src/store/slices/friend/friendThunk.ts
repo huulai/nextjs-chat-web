@@ -21,9 +21,8 @@ export const addFriendThunk = createAsyncThunk(
   "friend/addFriend",
   async (email: string) => {
     try {
-      const res = await gql.AddFriend({ email });
+      await gql.AddFriend({ email });
       toast.success("Sent a friend request");
-      return res.data;
     } catch (error) {
       console.log({ error });
       handleToastError(error);
@@ -31,12 +30,11 @@ export const addFriendThunk = createAsyncThunk(
   }
 );
 
-export const removeFriendThunk = createAsyncThunk(
-  "friend/removeFriend",
+export const deleteFriendThunk = createAsyncThunk(
+  "friend/deleteFriend",
   async (id: string) => {
     try {
-      const res = await gql.RemoveFriend({ id: Number(id) });
-      return res.data;
+      await gql.DeleteFriend({ id: Number(id) });
     } catch (error) {
       console.log({ error });
       handleToastError(error);
@@ -48,8 +46,7 @@ export const updateFriendThunk = createAsyncThunk(
   "friend/updateFriend",
   async (input: UpdateFriendMutationVariables) => {
     try {
-      const res = await gql.UpdateFriend(input);
-      return res.data;
+      await gql.UpdateFriend(input);
     } catch (error) {
       console.log({ error });
       handleToastError(error);

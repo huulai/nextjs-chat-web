@@ -1,0 +1,13 @@
+mutation UpdateUserInfo($userInfo: UpdateUserInfoInput!) {
+  updateUserInfo(updateUserInfoInput: $userInfo) {
+    id
+    username
+    email
+    sex
+    interests
+    aboutMe
+    age
+    occupation
+    avatar
+  }
+}

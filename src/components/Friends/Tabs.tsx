@@ -19,12 +19,6 @@ const Tabs = ({
       >
         Requests
       </button>
-      <button
-        onClick={() => setTabSelected("Blocked")}
-        className={`tab ${tabSelected === "Blocked" ? "is-active" : ""}`}
-      >
-        Blocked
-      </button>
     </div>
   );
 };
