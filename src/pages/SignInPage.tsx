@@ -4,7 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../store";
 import { signInThunk } from "../store/slices/user/userThunk";
-import { toast } from "react-toastify";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");

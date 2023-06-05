@@ -8,6 +8,7 @@ import AppLayout from "../layout/AppLayout/AppLayout";
 import DiscoveryPage from "../pages/DiscoveryPage";
 import FriendsPage from "../pages/FriendsPage";
 import ProfilePage from "../pages/Profile";
+import ProfileEditPage from "../pages/ProfileEditPage";
 
 export const router = createBrowserRouter([
   {
@@ -31,6 +32,14 @@ export const router = createBrowserRouter([
     element: (
       <AppLayout>
         <HomePage />
+      </AppLayout>
+    ),
+  },
+  {
+    path: "/profile/edit",
+    element: (
+      <AppLayout>
+        <ProfileEditPage />
       </AppLayout>
     ),
   },

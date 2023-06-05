@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
-  removeFriendThunk,
+  deleteFriendThunk,
   updateFriendThunk,
 } from "../../store/slices/friend/friendThunk";
 import Avatar from "../commons/Avatar";
@@ -48,7 +48,7 @@ const RequestsContainter = () => {
               )}
 
               <button
-                onClick={() => dispatch(removeFriendThunk(friend.id))}
+                onClick={() => dispatch(deleteFriendThunk(friend.id))}
                 className="cursor-pointer rounded-2xl border border-warning p-1 text-xs ml-2"
               >
                 Cancel

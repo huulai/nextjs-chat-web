@@ -6,7 +6,7 @@ const Input = ({
   type,
   name,
 }: {
-  children: React.ReactNode | undefined;
+  children?: React.ReactNode | undefined;
   value: string;
   handleOnChange: (payload: string) => void;
   placeholder: string;
