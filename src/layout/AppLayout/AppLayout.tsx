@@ -15,7 +15,8 @@ import {
   receiveFriendRequest,
   updateFriend,
 } from "../../store/slices/friend/friendSlice";
-import { Link, useHref, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { getFriendsThunk } from "../../store/slices/friend/friendThunk";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,7 +42,11 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     if (dataFetchedRef.current) return;
     dataFetchedRef.current = true;
-    if (!userId) dispatch(getUserInfoThunk());
+    if (!userId) {
+      dispatch(getUserInfoThunk());
+      dispatch(getFriendsThunk());
+    }
+
     friendActionSubscription(onFriendActionSubscription);
   }, []);
 

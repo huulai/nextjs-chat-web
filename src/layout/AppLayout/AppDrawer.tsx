@@ -66,7 +66,7 @@ const AppDrawer = () => {
               height={20}
               className="inline-block"
             />
-            <span className="ml-2">Home</span>
+            <span className="ml-2">Conversations</span>
           </Link>
           <Link
             to="/friends"
@@ -95,20 +95,6 @@ const AppDrawer = () => {
               className="inline-block"
             />
             <span className="ml-2">Profile</span>
-          </Link>
-          <Link
-            to="/discovery"
-            className="flex flex-row items-center mt-4 cursor-pointer"
-            onClick={() => setOpenDrawer(false)}
-          >
-            <img
-              src="/discovery.svg"
-              alt="discovery"
-              width={20}
-              height={20}
-              className="inline-block"
-            />
-            <span className="ml-2">Discovery</span>
           </Link>
           <button
             className="flex flex-row items-center mt-4 cursor-pointer"

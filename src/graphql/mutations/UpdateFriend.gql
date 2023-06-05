@@ -3,13 +3,25 @@ mutation UpdateFriend($id: Int!, $status: String!) {
     id
     sender {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     receiver {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     status
   }

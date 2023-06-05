@@ -52,14 +52,6 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/discovery",
-    element: (
-      <AppLayout>
-        <DiscoveryPage />
-      </AppLayout>
-    ),
-  },
-  {
     path: "/friends",
     element: (
       <AppLayout>

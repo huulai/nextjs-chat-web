@@ -6,6 +6,12 @@ mutation SignUp($input: SignUpInput!) {
       id
       username
       email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }

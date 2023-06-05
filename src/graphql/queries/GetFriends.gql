@@ -4,13 +4,25 @@ query Friends {
     status
     sender {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     receiver {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }

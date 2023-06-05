@@ -95,7 +95,7 @@ const updateUser = (state: userState, user: User) => {
   state.interests = user.interests as string[];
 };
 
-const updateToken = (accessToken: string, refreshToken: string) => {
+const updateToken = (refreshToken: string, accessToken: string) => {
   localStorage.setItem("accessToken", accessToken);
   localStorage.setItem("refreshToken", refreshToken);
 };

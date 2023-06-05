@@ -258,7 +258,7 @@ export type AddFriendMutationVariables = Exact<{
 }>;
 
 
-export type AddFriendMutation = { __typename?: 'Mutation', addFriend: { __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, email: string, username: string }, receiver: { __typename?: 'User', id: string, email: string, username: string } } };
+export type AddFriendMutation = { __typename?: 'Mutation', addFriend: { __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string }, receiver: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } } };
 
 export type DeleteFriendMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -277,21 +277,21 @@ export type LogoutMutation = { __typename?: 'Mutation', logout: { __typename?: '
 export type RefreshTokensMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type RefreshTokensMutation = { __typename?: 'Mutation', getNewTokens: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string } } };
+export type RefreshTokensMutation = { __typename?: 'Mutation', getNewTokens: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } } };
 
 export type SignInMutationVariables = Exact<{
   input: SignInInput;
 }>;
 
 
-export type SignInMutation = { __typename?: 'Mutation', signin: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string } } };
+export type SignInMutation = { __typename?: 'Mutation', signin: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } } };
 
 export type SignUpMutationVariables = Exact<{
   input: SignUpInput;
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string } } };
+export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'SignResponse', accessToken: string, refreshToken: string, user: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } } };
 
 export type UpdateFriendMutationVariables = Exact<{
   id: Scalars['Int'];
@@ -299,7 +299,7 @@ export type UpdateFriendMutationVariables = Exact<{
 }>;
 
 
-export type UpdateFriendMutation = { __typename?: 'Mutation', updateFriend: { __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, email: string, username: string }, receiver: { __typename?: 'User', id: string, email: string, username: string } } };
+export type UpdateFriendMutation = { __typename?: 'Mutation', updateFriend: { __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string }, receiver: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } } };
 
 export type UpdateUserInfoMutationVariables = Exact<{
   userInfo: UpdateUserInfoInput;
@@ -311,7 +311,7 @@ export type UpdateUserInfoMutation = { __typename?: 'Mutation', updateUserInfo: 
 export type FriendsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, email: string, username: string }, receiver: { __typename?: 'User', id: string, email: string, username: string } }> };
+export type FriendsQuery = { __typename?: 'Query', friends: Array<{ __typename?: 'Friend', id: string, status: FriendStatus, sender: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string }, receiver: { __typename?: 'User', id: string, username: string, email: string, sex: string, interests?: Array<string> | null, aboutMe: string, age: number, occupation: string, avatar: string } }> };
 
 export type UserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -325,13 +325,25 @@ export const AddFriendDocument = gql`
     id
     sender {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     receiver {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     status
   }
@@ -360,6 +372,12 @@ export const RefreshTokensDocument = gql`
       id
       username
       email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }
@@ -373,6 +391,12 @@ export const SignInDocument = gql`
       id
       username
       email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }
@@ -386,6 +410,12 @@ export const SignUpDocument = gql`
       id
       username
       email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }
@@ -396,13 +426,25 @@ export const UpdateFriendDocument = gql`
     id
     sender {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     receiver {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     status
   }
@@ -430,13 +472,25 @@ export const FriendsDocument = gql`
     status
     sender {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
     receiver {
       id
-      email
       username
+      email
+      sex
+      interests
+      aboutMe
+      age
+      occupation
+      avatar
     }
   }
 }
